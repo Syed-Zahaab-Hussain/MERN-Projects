@@ -11,10 +11,15 @@ import generalRoutes from "./routes/general.js";
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("combined"));
 app.use(cors());
+
+// Data Imports
+import User from "./models/User.js";
+import { dataUser } from "./data/index.js";
 
 // Routes
 app.use("/client", clientRoutes);
@@ -25,12 +30,14 @@ app.use("management", managementRoutes);
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 9000;
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI, {
+    dbName: "admin-dasboard",
+  })
   .then(() => {
     app.listen(PORT, () =>
       console.log(`server started on port http://localhost:${PORT}`)
     );
+
+    // User.insertMany(dataUser);
   })
   .catch((err) => console.log(`${err} did not connect`));
-
-// npm i react-redux @reduxjs/toolkit react-datepicker react-router-dom@6 @mui/material @mui/icons-material @mui/x-data-grid @emotion/react @emotion/styled @nivo/core @nivo/bar @nivo/geo @nivo/pie
