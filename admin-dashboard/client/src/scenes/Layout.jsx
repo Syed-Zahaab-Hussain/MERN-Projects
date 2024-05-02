@@ -16,7 +16,7 @@ const Layout = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:5001/general/user/${userId}`
+        `${import.meta.env.VITE_BASE_URL}/general/user/${userId}`
       );
       const data = await response.json();
       setData(data);
