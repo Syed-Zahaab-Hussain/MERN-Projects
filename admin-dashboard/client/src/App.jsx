@@ -4,7 +4,7 @@ import { themeSettings } from "./theme";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Customers, Dashboard, Layout, Products } from "./scenes";
+import { Customers, Dashboard, Layout, Products, Transactions } from "./scenes";
 
 const App = () => {
   const mode = useSelector((state) => state.global.mode);
@@ -19,6 +19,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/customers" element={<Customers />} />
+            <Route path="/transactions" element={<Transactions />} />
           </Route>
         </Routes>
       </ThemeProvider>

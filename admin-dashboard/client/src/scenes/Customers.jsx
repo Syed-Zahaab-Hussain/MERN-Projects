@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
 const Customers = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   const [data, setData] = useState([]);
   const columns = [
@@ -23,7 +23,6 @@ const Customers = () => {
     { field: "occupation", headerName: "Occupation", flex: 1 },
     { field: "role", headerName: "Role", flex: 0.5 },
   ];
-  // const isNonMobile = useMediaQuery("(min-width: 1000px)");
   useEffect(() => {
     const getProducts = async () => {
       const response = await fetch(
@@ -40,7 +39,29 @@ const Customers = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="CUSTOMERS" subtitle="List of customers" />
-      <Box mt="40px" height="75vh">
+      <Box
+        mt="40px"
+        height="75vh"
+        // sx={{
+        //   "& .MuiDataGrid-root": { border: "none" },
+        //   "& .MuiDataGrid-cell": {
+        //     borderBottom: "none",
+        //   },
+        //   "& .MuiDataGrid-columnHeaders": {
+        //     background: theme.palette.background.alt,
+        //     color: theme.palette.secondary[100],
+        //     borderBottom: "none",
+        //   },
+        //   "& .MuiDataGrid-footerContainer": {
+        //     background: theme.palette.background.alt,
+        //     color: theme.palette.secondary[100],
+        //     borderTop: "none",
+        //   },
+        //   "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+        //     color: `${theme.palette.secondary[200]} !important`,
+        //   },
+        // }}
+      >
         <DataGrid
           loading={data.length === 0 ? true : false}
           getRowId={(row) => row._id}
