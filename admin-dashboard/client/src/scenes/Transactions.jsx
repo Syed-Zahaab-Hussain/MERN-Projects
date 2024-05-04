@@ -1,7 +1,7 @@
-import { DataGrid } from "@mui/x-data-grid";
-import { Header, dataGridCustomToolbar } from "../components";
-import { Box, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { Header, DataGridCustomToolbar } from "../components";
+import { Box, useTheme } from "@mui/material";
 
 const Transactions = () => {
   const theme = useTheme();
@@ -12,6 +12,8 @@ const Transactions = () => {
   const [pageSize, setPageSize] = useState(20);
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
+
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -80,6 +82,7 @@ const Transactions = () => {
           rows={(data && data.transactions) || []}
           columns={columns}
           rowCount={(data && data.total) || 0}
+          rowsPerPageOptions={[20, 50, 100]}
           pagination
           page={page}
           pageSize={pageSize}
@@ -88,7 +91,15 @@ const Transactions = () => {
           onPageChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          components={{ Toolbar: dataGridCustomToolbar }}
+          // components={{ Toolbar: DataGridCustomToolbar }}
+          // componentsProps={{
+          //   toolbar: { searchInput, setSearchInput, setSearch },
+          // }}
+
+          slots={{ toolbar: DataGridCustomToolbar }}
+          slotProps={{
+            toolbar: { searchInput, setSearchInput, setSearch },
+          }}
         />
       </Box>
     </Box>
